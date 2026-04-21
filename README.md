@@ -150,7 +150,7 @@ dotnet test
 
 # 👨‍💻 Author
 
-Nikhil Parate
+Nikhil G Parate
 
 ---
 
