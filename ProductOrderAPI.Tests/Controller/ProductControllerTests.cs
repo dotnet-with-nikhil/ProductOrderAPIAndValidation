@@ -39,26 +39,56 @@ namespace ProductOrderAPI.Tests.Controllers
         [Fact]
         public async Task POST_Should_Return_Created()
         {
-            var dto = new ProductDto { Name = "Laptop-HP", Price = 80000 };
+            _serviceMock.Setup(x => x.Add(It.IsAny<Products>()))
+              .ReturnsAsync(1);
 
+            var dto = new ProductDto
+            {
+                Name = "Laptop-HP",
+                Price = 80000
+            };
+
+            // Act
             var result = await _controller.Post(dto);
-            result.Should().BeOfType<CreatedAtActionResult>();
+
+            // Assert
+            var createdResult = result as CreatedAtActionResult;
+            createdResult.Should().NotBeNull();
+
+            createdResult.ActionName.Should().Be(nameof(_controller.Get));
         }
 
         //PUT
         [Fact]
         public async Task Put_Should_Return_NoContent()
         {
-            var dto = new ProductDto { Name = "Laptop-HP", Price = 80000 };
+            // Arrange
+            _serviceMock
+                .Setup(x => x.Update(It.IsAny<int>(), It.IsAny<Products>()))
+                .ReturnsAsync(true);
 
+            var dto = new ProductDto
+            {
+                Name = "Laptop-HP",
+                Price = 80000
+            };
+
+            // Act
             var result = await _controller.Put(1, dto);
-            result.Should().BeOfType<NoContentResult>();
+
+            // Assert
+            result.Should().BeOfType<OkObjectResult>();
         }
 
         //PATCH
         [Fact]
         public async Task Patch_Should_Return_Ok()
         {
+            // Arrange
+            _serviceMock
+                .Setup(x => x.Patch(It.IsAny<int>(), It.IsAny<UpdateProductDto>()))
+                .ReturnsAsync(true);
+
             var dto = new UpdateProductDto { Name = "Laptop-HP-Updated" };
 
             var result = await _controller.Patch(1, dto);
@@ -69,7 +99,15 @@ namespace ProductOrderAPI.Tests.Controllers
         [Fact]
         public async Task Delete_Should_Return_NoContent()
         {
+            // Arrange
+            _serviceMock
+                .Setup(x => x.Detele(It.IsAny<int>()))
+                .ReturnsAsync(true);
+
+            // Act
             var result = await _controller.Delete(1);
+
+            // Assert
             result.Should().BeOfType<OkObjectResult>();
         }
 

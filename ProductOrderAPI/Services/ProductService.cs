@@ -31,7 +31,7 @@ namespace dotnet_example_clean_arch_with_entity_framework.Services
             return await _repo.Add(productModel);
         }
 
-        public async Task Update(int id, Products product)
+        public async Task<bool> Update(int id, Products product)
         {
             var productModel = await _repo.GetById(id);
 
@@ -41,11 +41,15 @@ namespace dotnet_example_clean_arch_with_entity_framework.Services
             productModel.Name = product.Name;
             productModel.Price = product.Price;
             await _repo.Update(productModel);
+            return true;
         }
 
-        public async Task Patch(int id, UpdateProductDto dto)
+        public async Task<bool> Patch(int id, UpdateProductDto dto)
         {
             var product = await _repo.GetById(id);
+
+            if (product == null)
+                return false;
 
             if (dto.Name != null)
                 product.Name = dto.Name;
@@ -54,12 +58,18 @@ namespace dotnet_example_clean_arch_with_entity_framework.Services
                 product.Price = dto.Price.Value;
 
             await _repo.Update(product);
+            return true;
         }
 
-        public async Task Detele(int id)
+        public async Task<bool> Detele(int id)
         {
             var product = await _repo.GetById(id);
+
+            if (product == null)
+                return false;
+
             await _repo.Delete(product);
+            return true;
         }
 
         public async Task<bool> IsExists(int id)
