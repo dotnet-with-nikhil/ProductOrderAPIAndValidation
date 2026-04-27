@@ -1,0 +1,40 @@
+2026-04-27 11:18:56 [Level] Incoming Request: "GET" "/swagger/index.html" from "::1" { ThreadId: 13, MachineName: "NIKHIL" } 
+2026-04-27 11:18:56 [Level] Outgoing Response: 200 completed in 584 ms { ThreadId: 13, MachineName: "NIKHIL" } 
+2026-04-27 11:18:57 [Level] Incoming Request: "GET" "/swagger/v1/swagger.json" from "::1" { ThreadId: 12, MachineName: "NIKHIL" } 
+2026-04-27 11:18:57 [Level] Outgoing Response: 200 completed in 89 ms { ThreadId: 13, MachineName: "NIKHIL" } 
+2026-04-27 11:19:03 [Level] Incoming Request: "GET" "/api/Product" from "::1" { ThreadId: 12, MachineName: "NIKHIL" } 
+2026-04-27 11:19:10 [Level] Outgoing Response: 200 completed in 6441 ms { ThreadId: 12, MachineName: "NIKHIL" } 
+2026-04-27 11:19:54 [Level] Incoming Request: "GET" "/swagger/index.html" from "::1" { ThreadId: 15, MachineName: "NIKHIL" } 
+2026-04-27 11:19:55 [Level] Outgoing Response: 200 completed in 763 ms { ThreadId: 15, MachineName: "NIKHIL" } 
+2026-04-27 11:19:56 [Level] Incoming Request: "GET" "/swagger/v1/swagger.json" from "::1" { ThreadId: 15, MachineName: "NIKHIL" } 
+2026-04-27 11:19:56 [Level] Outgoing Response: 200 completed in 255 ms { ThreadId: 11, MachineName: "NIKHIL" } 
+2026-04-27 11:20:17 [Level] Incoming Request: "GET" "/api/Product" from "::1" { ThreadId: 11, MachineName: "NIKHIL" } 
+2026-04-27 11:20:24 [Level] Outgoing Response: 200 completed in 7175 ms { ThreadId: 14, MachineName: "NIKHIL" } 
+2026-04-27 11:20:41 [Level] Incoming Request: "POST" "/api/Product" from "::1" { ThreadId: 15, MachineName: "NIKHIL" } 
+2026-04-27 11:20:42 [Level] Outgoing Response: 201 completed in 1352 ms { ThreadId: 20, MachineName: "NIKHIL" } 
+2026-04-27 11:24:20 [Level] Incoming Request: "GET" "/swagger/index.html" from "::1" { ThreadId: 13, MachineName: "NIKHIL" } 
+2026-04-27 11:24:21 [Level] Outgoing Response: 200 completed in 667 ms { ThreadId: 10, MachineName: "NIKHIL" } 
+2026-04-27 11:24:22 [Level] Incoming Request: "GET" "/swagger/v1/swagger.json" from "::1" { ThreadId: 8, MachineName: "NIKHIL" } 
+2026-04-27 11:24:22 [Level] Outgoing Response: 200 completed in 124 ms { ThreadId: 13, MachineName: "NIKHIL" } 
+2026-04-27 11:24:38 [Level] Incoming Request: "GET" "/api/Product/test-exception" from "::1" { ThreadId: 17, MachineName: "NIKHIL" } 
+2026-04-27 11:24:57 [Level] Unhandled Exception occurred. Path: "/api/Product/test-exception", Method: "GET" { ThreadId: 17, MachineName: "NIKHIL" } 
+System.Exception: This is test exception for Logging
+   at dotnet_example_clean_arch_with_entity_framework.Controllers.ProductController.TestException() in D:\Youtube Videos\1-DotNet\ProductOrderAPIAndValidation\ProductOrderAPI\Controllers\ProductController.cs:line 118
+   at lambda_method2(Closure, Object, Object[])
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at dotnet_example_clean_arch_with_entity_framework.Middlewares.ExceptionMiddleware.Invoke(HttpContext context) in D:\Youtube Videos\1-DotNet\ProductOrderAPIAndValidation\ProductOrderAPI\Middlewares\ExceptionMiddleware.cs:line 22
+2026-04-27 11:24:57 [Level] Outgoing Response: 500 completed in 19919 ms { ThreadId: 17, MachineName: "NIKHIL" } 

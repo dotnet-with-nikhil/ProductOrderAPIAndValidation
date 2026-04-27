@@ -112,6 +112,10 @@ namespace dotnet_example_clean_arch_with_entity_framework.Controllers
             return Ok();
         }
 
-
+        [HttpGet("test-exception")]
+        public IActionResult TestException()
+        {
+            throw new Exception("This is test exception for Logging");
+        }
     }
 }

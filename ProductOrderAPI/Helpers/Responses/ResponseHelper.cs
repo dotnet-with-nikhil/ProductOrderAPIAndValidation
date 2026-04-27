@@ -7,7 +7,7 @@
             return new ApiResponse<T>(true, message, data);
         }
 
-        public static ApiResponse<T> Fail<T>(string message, List<string> errors = null)
+        public static ApiResponse<T> Fail<T>(string message, List<ApiError> errors = null)
         {
             return new ApiResponse<T>(false, message, default, errors);
         }

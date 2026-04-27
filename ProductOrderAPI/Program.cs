@@ -1,12 +1,29 @@
 using dotnet_example_clean_arch_with_entity_framework.Data;
+using dotnet_example_clean_arch_with_entity_framework.Middlewares;
 using dotnet_example_clean_arch_with_entity_framework.Repositories;
 using dotnet_example_clean_arch_with_entity_framework.Repositories.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using FluentValidation;
-using dotnet_example_clean_arch_with_entity_framework.Services.Interfaces;
 using dotnet_example_clean_arch_with_entity_framework.Services;
+using dotnet_example_clean_arch_with_entity_framework.Services.Interfaces;
+using FluentValidation;
+using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//configuration logger
+
+Log.Logger = new LoggerConfiguration()
+             .Enrich.FromLogContext()
+             .Enrich.WithThreadId()
+             .Enrich.WithMachineName()
+             .WriteTo.Console()
+             .WriteTo.File(
+                path: "Logs/log-.txt",
+                rollingInterval: RollingInterval.Day,
+                outputTemplate:
+                "{Timestamp:yyyy-MM-dd HH:mm:ss} [Level] {Message} {Properties} {NewLine}{Exception}"
+            )
+             .CreateLogger();
 
 // Add services to the container.
 
@@ -38,6 +55,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+app.UseMiddleware<RequestLoggingMiddleware>();
+app.UseMiddleware<ExceptionMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
